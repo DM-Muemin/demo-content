@@ -1,0 +1,21 @@
+-- Sample SQL script for optimizing PostgreSQL queries
+-- Adding an index to improve performance
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+
+-- Optimized query using indexed columns
+SELECT customer_id, SUM(order_total) 
+FROM orders 
+WHERE order_date > '2024-01-01' 
+GROUP BY customer_id;
+
+-- Analyze slow query performance
+EXPLAIN ANALYZE 
+SELECT * FROM orders WHERE order_status = 'pending';
+
+-- Vacuum & Analyze for performance tuning
+VACUUM ANALYZE orders;
+
+-- Past commit messages related to performance improvements
+-- Commit: Optimized query execution for high-load transactions
+-- Commit: Added missing indexes on frequently used join columns
+-- Commit: Refactored slow queries impacting dashboard load times
